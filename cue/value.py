@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from typing import final
+from typing import Any, final
 import libcue
 
 from typing import TYPE_CHECKING
@@ -30,6 +30,11 @@ class Value:
 
     def __del__(self):
         libcue.free(self._val)
+
+    def __eq__(self, other: Any) -> bool:
+        if isinstance(other, Value):
+            return libcue.is_equal(self._val, other._val)
+        return False
 
     def context(self) -> 'Context':
         return self._ctx

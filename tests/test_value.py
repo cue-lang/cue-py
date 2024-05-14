@@ -23,3 +23,36 @@ def test_context():
 
     val = ctx.compile("x: 42")
     assert val.context() == ctx
+
+def test_equal():
+    ctx = cue.Context()
+
+    val0 = ctx.compile("")
+    val1 = ctx.compile("")
+    assert val0 == val1
+
+    val2 = ctx.compile("x: 1")
+    val3 = ctx.compile("x: 1")
+    assert val2 == val3
+
+    val4 = ctx.compile("a: b: { x: 42, y: \"hello\" }")
+    val5 = ctx.compile("a: b: { x: 42, y: \"hello\" }")
+    assert val4 == val5
+
+def test_not_equal():
+    ctx = cue.Context()
+
+    val0 = ctx.compile("")
+    val1 = ctx.compile("true")
+    assert val0 != val1
+
+    val2 = ctx.compile("x: 1")
+    val3 = ctx.compile("x: 2")
+    assert val2 != val3
+
+    val4 = ctx.compile("a: b: { x: 42, y: \"hello\" }")
+    val5 = ctx.compile("a: b: { x: 42, y: \"world\" }")
+    assert val4 != val5
+
+    val6 = ctx.compile("true")
+    assert val6 != True

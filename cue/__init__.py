@@ -19,6 +19,7 @@ from .build import (
     InferBuiltins,
     Scope,
 )
+from .context import Context
 from .error import Error
 from .eval import (
     All,
@@ -43,6 +44,7 @@ __all__ = [
     'Attributes',
     'BuildOption',
     'Concrete',
+    'Context',
     'Definitions',
     'DisallowCycles',
     'Docs',

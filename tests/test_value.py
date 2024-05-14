@@ -12,24 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from typing import final
-import libcue
+import pytest
+import cue
 
-from typing import TYPE_CHECKING
-if TYPE_CHECKING:
-    from cue.context import Context
+def test_context():
+    ctx = cue.Context()
 
-@final
-class Value:
-    _ctx: 'Context'
-    _val: int
+    val = ctx.compile("")
+    assert val.context() == ctx
 
-    def __init__(self, ctx: 'Context', v: int):
-        self._ctx = ctx
-        self._val = v
-
-    def __del__(self):
-        libcue.free(self._val)
-
-    def context(self) -> 'Context':
-        return self._ctx
+    val = ctx.compile("x: 42")
+    assert val.context() == ctx

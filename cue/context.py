@@ -12,24 +12,31 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from functools import singledispatchmethod
 from typing import final
+from cue.value import Value
+from cue.build import BuildOption
+from cue.compile import compile, compile_bytes
 import libcue
 
-from typing import TYPE_CHECKING
-if TYPE_CHECKING:
-    from cue.context import Context
-
 @final
-class Value:
-    _ctx: 'Context'
-    _val: int
+class Context:
+    _ctx: int
 
-    def __init__(self, ctx: 'Context', v: int):
-        self._ctx = ctx
-        self._val = v
+    def __init__(self):
+        self._ctx = libcue.newctx()
 
     def __del__(self):
-        libcue.free(self._val)
+        libcue.free(self._ctx)
 
-    def context(self) -> 'Context':
-        return self._ctx
+    @singledispatchmethod
+    def compile(self, s, *opts: BuildOption) -> Value:
+        raise NotImplementedError
+
+    @compile.register
+    def _(self, s: str, *opts: BuildOption) -> Value:
+        return compile(self, s, *opts)
+
+    @compile.register
+    def _(self, b: bytes, *opts: BuildOption) -> Value:
+        return compile_bytes(self, b, *opts)

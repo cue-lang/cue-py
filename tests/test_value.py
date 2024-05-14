@@ -91,3 +91,45 @@ def test_unify_error():
     b = ctx.compile("false")
     r = ctx.bottom()
     assert r == a.unify(b)
+
+def test_decode():
+    ctx = cue.Context()
+
+    val = ctx.compile("1")
+    assert val.to_int() == 1
+
+    val = ctx.compile("-1")
+    assert val.to_int() == -1
+
+    val = ctx.compile("true")
+    assert val.to_bool() == True
+
+    val = ctx.compile("false")
+    assert val.to_bool() == False
+
+    val = ctx.compile("1.2345")
+    assert val.to_float() == 1.2345
+
+    val = ctx.compile("\"hello\"")
+    assert val.to_str() == "hello"
+
+    val = ctx.compile("'world'")
+    assert val.to_bytes() == b"world"
+
+    val = ctx.compile("x: { a: 1, b: true }")
+    assert val.to_json() == r'{"x":{"a":1,"b":true}}'
+
+def test_decode_error():
+    ctx = cue.Context()
+
+    with pytest.raises(cue.Error):
+        ctx.compile("1").to_bool()
+
+    with pytest.raises(cue.Error):
+        ctx.compile("-1").to_str()
+
+    with pytest.raises(cue.Error):
+        ctx.compile("true").to_float()
+
+    with pytest.raises(cue.Error):
+        ctx.compile("false").to_unsigned()

@@ -16,7 +16,7 @@
 Perform operations on CUE values.
 """
 
-from typing import final
+from typing import Any, final
 import libcue
 
 from typing import TYPE_CHECKING
@@ -44,6 +44,26 @@ class Value:
 
     def __del__(self):
         libcue.free(self._val)
+
+    def __eq__(self, other: Any) -> bool:
+        """
+        Check whether two CUE values are equal.
+
+        Reports whether two values are equal, ignoring optional
+        fields. The result is undefined for incomplete values.
+
+        Corresponding Go functionality is documented at:
+        https://pkg.go.dev/cuelang.org/go/cue#Value.Equals
+
+        Args:
+            other: the other value to compare with.
+
+        Returns:
+            bool: True if the two values are complete and equal CUE values, False otherwise.
+        """
+        if isinstance(other, Value):
+            return libcue.is_equal(self._val, other._val)
+        return False
 
     def context(self) -> 'Context':
         """The Context that created this Value."""

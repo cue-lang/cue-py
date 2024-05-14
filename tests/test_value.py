@@ -129,3 +129,12 @@ def test_decode_error():
 
     with pytest.raises(cue.Error):
         ctx.compile("false").to_unsigned()
+
+def test_lookup():
+    ctx = cue.Context()
+
+    val = ctx.compile("x: true")
+    assert val.lookup("x").to_bool() == True
+
+    val = ctx.compile(r'x: y: { a: 1, b: "hello"}')
+    assert val.lookup("x").lookup("y").lookup("b").to_str() == "hello"

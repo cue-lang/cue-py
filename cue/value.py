@@ -16,7 +16,7 @@
 Perform operations on CUE values.
 """
 
-from typing import Any, final
+from typing import Any, Optional, final
 from cue.error import Error
 import libcue
 
@@ -216,6 +216,15 @@ class Value:
 
         return _to_json(self)
 
+    def default(self) -> Optional['Value']:
+        """
+        Return default value.
+
+        Returns:
+            Optional[Value]: the default value, if it exists, or None otherwise.
+        """
+        return _default(self)
+
 def _to_int(val: Value) -> int:
     ptr = libcue.ffi.new("int64_t*")
     err = libcue.dec_int64(val._val, ptr)
@@ -300,3 +309,10 @@ def _lookup(val: Value, path: str) -> Value:
     if err != 0:
         raise Error(err)
     return Value(val._ctx, val_ptr[0])
+
+def _default(val: Value) -> Optional[Value]:
+    ok_ptr = libcue.ffi.new("bool*")
+    res = libcue.default(val._val, ok_ptr)
+    if ok_ptr[0] == 1:
+        return Value(val._ctx, res)
+    return None

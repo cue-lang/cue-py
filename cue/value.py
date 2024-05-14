@@ -12,22 +12,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from .build import (
-    BuildOption,
-    FileName,
-    ImportPath,
-    InferBuiltins,
-    Scope,
-)
-from .error import Error
-from .value import Value
-
-__all__ = [
-    'BuildOption',
-    'Error',
-    'FileName',
-    'ImportPath',
-    'InferBuiltins',
-    'Scope',
-    'Value',
-]
+class Value:
+    _val: int

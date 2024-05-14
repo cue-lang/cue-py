@@ -1,0 +1,14 @@
+attrs==23.2.0
+cffi==1.16.0
+filelock==3.13.4
+iniconfig==2.0.0
+mypy==1.9.0
+mypy-extensions==1.0.0
+packaging==24.0
+pluggy==1.4.0
+pycparser==2.22
+pytest==8.1.1
+pytest-mypy==0.10.3
+types-cffi==1.16.0.20240331
+types-setuptools==69.5.0.20240423
+typing_extensions==4.11.0

@@ -20,14 +20,44 @@ from .build import (
     Scope,
 )
 from .error import Error
+from .eval import (
+    All,
+    Attributes,
+    Concrete,
+    Definitions,
+    DisallowCycles,
+    Docs,
+    ErrorsAsValues,
+    EvalOption,
+    Final,
+    Hidden,
+    InlineImports,
+    Optionals,
+    Raw,
+    Schema,
+)
 from .value import Value
 
 __all__ = [
+    'All',
+    'Attributes',
     'BuildOption',
+    'Concrete',
+    'Definitions',
+    'DisallowCycles',
+    'Docs',
     'Error',
+    'ErrorsAsValues',
+    'EvalOption',
     'FileName',
+    'Final',
+    'Hidden',
     'ImportPath',
     'InferBuiltins',
+    'InlineImports',
+    'Optionals',
+    'Raw',
+    'Schema',
     'Scope',
     'Value',
 ]

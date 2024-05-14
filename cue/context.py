@@ -83,3 +83,52 @@ class Context:
         Return an instance of CUE `_|_`.
         """
         return Value(self, libcue.bottom(self._ctx))
+
+    @singledispatchmethod
+    def to_value(self, arg) -> Value:
+        """
+        Convert Python value to CUE value.
+
+        Args:
+            arg: a Python bool, int, float, str, or bytes.
+
+        Returns:
+            Value: the CUE value denoting arg.
+        """
+        raise NotImplementedError
+
+    @to_value.register
+    def _(self, arg: int):
+        return Value(self, libcue.from_int64(self._ctx, arg))
+
+    @to_value.register
+    def _(self, arg: bool):
+        return Value(self, libcue.from_bool(self._ctx, arg))
+
+    @to_value.register
+    def _(self, arg: float):
+        return Value(self, libcue.from_double(self._ctx, arg))
+
+    @to_value.register
+    def _(self, arg: str):
+        c_str = libcue.ffi.new("char[]", arg.encode("utf-8"))
+        return Value(self, libcue.from_string(self._ctx, c_str))
+
+    @to_value.register
+    def _(self, arg: bytes):
+        c_buf = libcue.ffi.from_buffer(arg)
+        return Value(self, libcue.from_bytes(self._ctx, c_buf, len(arg)))
+
+    def to_value_from_unsigned(self, arg: int) -> Value:
+        """
+        Convert Python int to unsigned CUE value.
+
+        Interpret arg as an unsigned integer and convert it to CUE.
+
+        Args:
+            arg: Python value holding an unsigned integer.
+
+        Return:
+            Value: the CUE value denoting arg.
+        """
+        return Value(self, libcue.from_uint64(self._ctx, arg))

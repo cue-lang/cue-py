@@ -12,6 +12,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""
+cue: Python bindings to CUE
+
+CUE is an open source data constraint language which aims to simplify
+tasks involving defining and using data.
+
+This package provide programmatic access to CUE from Python. The
+Python API roughly follows the Go API documented at
+https://pkg.go.dev/cuelang.org/go/cue, but uses Python idioms when
+appropiate.
+
+A Value represents a CUE value. Values are created from a Context.
+Multiple values involved in some operation must use the same Context.
+
+For more information about the CUE language see https://cuelang.org.
+"""
+
 from .build import (
     BuildOption,
     FileName,
@@ -19,6 +36,7 @@ from .build import (
     InferBuiltins,
     Scope,
 )
+from .context import Context
 from .error import Error
 from .eval import (
     All,
@@ -43,6 +61,7 @@ __all__ = [
     'Attributes',
     'BuildOption',
     'Concrete',
+    'Context',
     'Definitions',
     'DisallowCycles',
     'Docs',

@@ -40,3 +40,9 @@ class Context:
     @compile.register
     def _(self, b: bytes, *opts: BuildOption) -> Value:
         return compile_bytes(self, b, *opts)
+
+    def top(self) -> Value:
+        return Value(self, libcue.top(self._ctx))
+
+    def bottom(self) -> Value:
+        return Value(self, libcue.bottom(self._ctx))

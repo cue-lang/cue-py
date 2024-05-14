@@ -56,3 +56,34 @@ def test_not_equal():
 
     val6 = ctx.compile("true")
     assert val6 != True
+
+def test_unify():
+    ctx = cue.Context()
+
+    a = ctx.top()
+    b = ctx.compile("true")
+    r = ctx.compile("true")
+    assert r == a.unify(b)
+
+    a = ctx.compile("int")
+    b = ctx.compile("42")
+    r = ctx.compile("42")
+    assert r == a.unify(b)
+
+    a = ctx.compile("<100")
+    b = ctx.compile("5")
+    r = ctx.compile("5")
+    assert r == a.unify(b)
+
+    a = ctx.compile("x: y: string")
+    b = ctx.compile('x: y: "hello"')
+    r = ctx.compile('x: y: "hello"')
+    assert r == a.unify(b)
+
+def test_unify_error():
+    ctx = cue.Context()
+
+    a = ctx.compile("true")
+    b = ctx.compile("false")
+    r = ctx.bottom()
+    assert r == a.unify(b)

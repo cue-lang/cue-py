@@ -38,3 +38,7 @@ class Value:
 
     def context(self) -> 'Context':
         return self._ctx
+
+    def unify(self, other: 'Value') -> 'Value':
+        v = libcue.unify(self._val, other._val)
+        return Value(self._ctx, v)

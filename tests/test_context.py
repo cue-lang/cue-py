@@ -138,3 +138,51 @@ def test_compile_error():
 
     with pytest.raises(cue.Error, match="expected operand, found 'EOF'"):
         ctx.compile(b"a: b: -")
+
+def test_to_value():
+    ctx = cue.Context()
+
+    val = ctx.to_value(1)
+    assert val == ctx.compile("1")
+
+    val = ctx.to_value(-1)
+    assert val == ctx.compile("-1")
+
+    val = ctx.to_value(42)
+    assert val == ctx.compile("42")
+
+    val = ctx.to_value(True)
+    assert val == ctx.compile("true")
+
+    val = ctx.to_value(False)
+    assert val == ctx.compile("false")
+
+    val = ctx.to_value(1.2345)
+    assert val == ctx.compile("1.2345")
+
+    val = ctx.to_value("hello")
+    assert val == ctx.compile("\"hello\"")
+
+    val = ctx.to_value(b"world")
+    assert val == ctx.compile("'world'")
+
+def test_encoding_decoding_equal():
+    ctx = cue.Context()
+
+    v = 1
+    assert v == ctx.to_value(v).to_int()
+
+    v = 0xcafebabe
+    assert v == ctx.to_value(v).to_unsigned()
+
+    v = True
+    assert v == ctx.to_value(v).to_bool()
+
+    v = 1.2345
+    assert v == ctx.to_value(v).to_float()
+
+    v = "hello"
+    assert v == ctx.to_value(v).to_str()
+
+    v = b"world"
+    assert v == ctx.to_value(v).to_bytes()

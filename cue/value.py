@@ -80,6 +80,18 @@ class Value:
         v = libcue.unify(self._val, other._val)
         return Value(self._ctx, v)
 
+    def lookup(self, path: str) -> 'Value':
+        """
+        Return the CUE value at path.
+
+        Args:
+            path: CUE path relative to self.
+
+        Returns:
+            Value: the value reached at path, starting from self.
+        """
+        return _lookup(self, path)
+
     def to_int(self) -> int:
         """
         Convert CUE value to integer.
@@ -279,3 +291,12 @@ def _to_json(val: Value) -> str:
     s = dec.decode("utf-8")
     libcue.libc_free(buf_ptr[0])
     return s
+
+def _lookup(val: Value, path: str) -> Value:
+    val_ptr = libcue.ffi.new("cue_value*")
+    path_ptr = libcue.ffi.new("char[]", path.encode("utf-8"))
+
+    err = libcue.lookup_string(val._val, path_ptr, val_ptr)
+    if err != 0:
+        raise Error(err)
+    return Value(val._ctx, val_ptr[0])

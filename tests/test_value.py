@@ -138,3 +138,21 @@ def test_lookup():
 
     val = ctx.compile(r'x: y: { a: 1, b: "hello"}')
     assert val.lookup("x").lookup("y").lookup("b").to_str() == "hello"
+
+def test_default():
+    ctx = cue.Context()
+
+    v = ctx.compile("int")
+    assert v.default() == None
+
+    v = ctx.compile("1")
+    assert v.default() == None
+
+    v = ctx.compile("int | *1")
+    assert v.default() == ctx.to_value(1)
+
+    v = ctx.compile(r'string | *"hello"')
+    assert v.default() == ctx.to_value("hello")
+
+    v = ctx.compile(r'(int | *1) & 2')
+    assert v.default() == None

@@ -68,3 +68,13 @@ class Value:
     def context(self) -> 'Context':
         """The Context that created this Value."""
         return self._ctx
+
+    def unify(self, other: 'Value') -> 'Value':
+        """
+        Compute the greatest lower bound of two CUE values.
+
+        Corresponding Go functionality is documented at:
+        https://pkg.go.dev/cuelang.org/go/cue#Value.Unify
+        """
+        v = libcue.unify(self._val, other._val)
+        return Value(self._ctx, v)

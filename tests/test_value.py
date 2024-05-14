@@ -156,3 +156,72 @@ def test_default():
 
     v = ctx.compile(r'(int | *1) & 2')
     assert v.default() == None
+
+def test_check_schema():
+    ctx = cue.Context()
+
+    s = ctx.compile("bool")
+    v = ctx.compile("true")
+    v.check_schema(s)
+
+    s = ctx.compile("int")
+    v = ctx.compile("42")
+    v.check_schema(s)
+
+    s = ctx.compile("number")
+    v = ctx.compile("1.2345")
+    v.check_schema(s)
+
+    s = ctx.compile("string")
+    v = ctx.compile(r'"hello"')
+    v.check_schema(s)
+
+    s = ctx.compile("x: int8")
+    v = ctx.compile("x: 1")
+    v.check_schema(s)
+
+    s = ctx.compile(r'{ x: bool, y: { a: int, b!: string} }')
+    v = ctx.compile(r'{ x: false, y: { a: 1, b: "hello"} }')
+    v.check_schema(s)
+
+def test_check_schema_error():
+    ctx = cue.Context()
+
+    s = ctx.compile("bool")
+    v = ctx.compile("1")
+    with pytest.raises(cue.Error):
+        v.check_schema(s)
+
+    s = ctx.compile("int")
+    v = ctx.compile("true")
+    with pytest.raises(cue.Error):
+        v.check_schema(s)
+
+    s = ctx.compile("number")
+    v = ctx.compile("false")
+    with pytest.raises(cue.Error):
+        v.check_schema(s)
+
+    s = ctx.compile("string")
+    v = ctx.compile("42")
+    with pytest.raises(cue.Error):
+        v.check_schema(s)
+
+    s = ctx.compile("x: int8")
+    v = ctx.compile("x: 78942372348")
+    with pytest.raises(cue.Error):
+        v.check_schema(s)
+
+    s = ctx.compile(r'{ x: bool, y: { a: int, b!: string} }')
+    v = ctx.compile(r'{ x: 1, y: { a: true, b: 1.2345} }')
+    with pytest.raises(cue.Error):
+        v.check_schema(s)
+
+def test_validate():
+    ctx = cue.Context()
+
+    ctx.compile("1").validate()
+    ctx.compile("{ x: 42 }").validate()
+
+    with pytest.raises(cue.Error):
+        ctx.compile("int").validate(cue.Concrete(True))

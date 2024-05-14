@@ -12,8 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from typing import Any, final
+from typing import Any, Optional, final
 from cue.error import Error
+from cue.eval import EvalOption, encode_eval_opts
 import libcue
 
 from typing import TYPE_CHECKING
@@ -44,6 +45,9 @@ class Value:
         v = libcue.unify(self._val, other._val)
         return Value(self._ctx, v)
 
+    def lookup(self, path: str) -> 'Value':
+        return _lookup(self, path)
+
     def to_int(self) -> int:
         return _to_int(self)
 
@@ -64,6 +68,21 @@ class Value:
 
     def to_json(self) -> str:
         return _to_json(self)
+
+    def default(self) -> Optional['Value']:
+        return _default(self)
+
+    def check_schema(self, schema: 'Value', *opts: EvalOption) -> None:
+        eval_opts = encode_eval_opts(*opts)
+        err = libcue.instance_of(self._val, schema._val, eval_opts)
+        if err != 0:
+            raise Error(err)
+
+    def validate(self, *opts: EvalOption) -> None:
+        eval_opts = encode_eval_opts(*opts)
+        err = libcue.validate(self._val, eval_opts)
+        if err != 0:
+            raise Error(err)
 
 def _to_int(val: Value) -> int:
     ptr = libcue.ffi.new("int64_t*")
@@ -140,3 +159,19 @@ def _to_json(val: Value) -> str:
     s = dec.decode("utf-8")
     libcue.libc_free(buf_ptr[0])
     return s
+
+def _lookup(val: Value, path: str) -> Value:
+    val_ptr = libcue.ffi.new("cue_value*")
+    path_ptr = libcue.ffi.new("char[]", path.encode("utf-8"))
+
+    err = libcue.lookup_string(val._val, path_ptr, val_ptr)
+    if err != 0:
+        raise Error(err)
+    return Value(val._ctx, val_ptr[0])
+
+def _default(val: Value) -> Optional[Value]:
+    ok_ptr = libcue.ffi.new("bool*")
+    res = libcue.default(val._val, ok_ptr)
+    if ok_ptr[0] == 1:
+        return Value(val._ctx, res)
+    return None

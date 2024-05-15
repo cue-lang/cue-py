@@ -19,6 +19,7 @@ Perform operations on CUE values.
 from typing import Any, Optional, final
 from cue.error import Error
 from cue.eval import EvalOption, encode_eval_opts
+from cue.kind import Kind, to_kind
 import libcue
 
 from typing import TYPE_CHECKING
@@ -224,6 +225,24 @@ class Value:
             Optional[Value]: the default value, if it exists, or None otherwise.
         """
         return _default(self)
+
+    def kind(self) -> Kind:
+        """
+        Return the type (kind) of a concrete CUE value.
+
+        Corresponding Go functionality is documented at:
+        https://pkg.go.dev/cuelang.org/go/cue#Value.Kind
+        """
+        return to_kind[libcue.concrete_kind(self._val)]
+
+    def incomplete_kind(self) -> Kind:
+        """
+        Return the type (kind) of any CUE value.
+
+        Corresponding Go functionality is documented at:
+        https://pkg.go.dev/cuelang.org/go/cue#Value.IncompleteKind
+        """
+        return to_kind[libcue.incomplete_kind(self._val)]
 
     def check_schema(self, schema: 'Value', *opts: EvalOption) -> None:
         """

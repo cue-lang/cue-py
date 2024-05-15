@@ -16,6 +16,23 @@
       "message": "The most recent CI test results via `ci/test` on GitHub:\n\nhttps://github.com/cue-lang/cue-py/actions/runs/9098988704",
       "revId": "e6a44f7d2b6adf08fd3212157ab15a8cb8a79b57",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2102185e_a7be2836",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1020333
+      },
+      "writtenOn": "2024-05-15T16:10:03Z",
+      "side": 1,
+      "message": "+2 on behalf of @paul@myitcv.io",
+      "revId": "e6a44f7d2b6adf08fd3212157ab15a8cb8a79b57",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }

@@ -37,6 +37,7 @@ from .eval import (
     Raw,
     Schema,
 )
+from .kind import Kind
 from .value import Value
 
 __all__ = [
@@ -57,6 +58,7 @@ __all__ = [
     'ImportPath',
     'InferBuiltins',
     'InlineImports',
+    'Kind',
     'Optionals',
     'Raw',
     'Schema',

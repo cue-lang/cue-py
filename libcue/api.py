@@ -24,6 +24,20 @@ ffi.cdef("""
     typedef uintptr_t cue_error;
 
     typedef enum {
+    	CUE_KIND_BOTTOM,
+    	CUE_KIND_NULL,
+    	CUE_KIND_BOOL,
+    	CUE_KIND_INT,
+    	CUE_KIND_FLOAT,
+    	CUE_KIND_STRING,
+    	CUE_KIND_BYTES,
+    	CUE_KIND_STRUCT,
+    	CUE_KIND_LIST,
+    	CUE_KIND_NUMBER,
+    	CUE_KIND_TOP,
+    } cue_kind;
+
+    typedef enum {
     	CUE_BUILD_NONE,
     	CUE_BUILD_FILENAME,
     	CUE_BUILD_IMPORT_PATH,
@@ -86,6 +100,8 @@ ffi.cdef("""
     cue_error	cue_dec_json(cue_value, uint8_t**, size_t*);
     cue_error	cue_validate(cue_value, void*);
     cue_value	cue_default(cue_value, bool*);
+    cue_kind	cue_concrete_kind(cue_value);
+    cue_kind	cue_incomplete_kind(cue_value);
     cue_error	cue_value_error(cue_value);
     bool	cue_is_equal(cue_value, cue_value);
 
@@ -95,6 +111,18 @@ ffi.cdef("""
 """)
 
 lib = ffi.dlopen("cue")
+
+KIND_BOTTOM = lib.CUE_KIND_BOTTOM
+KIND_NULL = lib.CUE_KIND_NULL
+KIND_BOOL = lib.CUE_KIND_BOOL
+KIND_INT = lib.CUE_KIND_INT
+KIND_FLOAT = lib.CUE_KIND_FLOAT
+KIND_STRING = lib.CUE_KIND_STRING
+KIND_BYTES = lib.CUE_KIND_BYTES
+KIND_STRUCT = lib.CUE_KIND_STRUCT
+KIND_LIST = lib.CUE_KIND_LIST
+KIND_NUMBER = lib.CUE_KIND_NUMBER
+KIND_TOP = lib.CUE_KIND_TOP
 
 BUILD_NONE = lib.CUE_BUILD_NONE
 BUILD_FILENAME = lib.CUE_BUILD_FILENAME
@@ -196,6 +224,12 @@ def validate(val: int, opts: Optional[FFI.CData]) -> int:
 
 def default(val: int, ok_ptr: FFI.CData) -> int:
     return lib.cue_default(val, ok_ptr)
+
+def concrete_kind(v: int) -> int:
+    return lib.cue_concrete_kind(v)
+
+def incomplete_kind(v: int) -> int:
+    return lib.cue_incomplete_kind(v)
 
 def is_equal(x: int, y: int) -> bool:
     return lib.cue_is_equal(x, y)

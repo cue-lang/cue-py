@@ -225,3 +225,60 @@ def test_validate():
 
     with pytest.raises(cue.Error):
         ctx.compile("int").validate(cue.Concrete(True))
+
+def test_kind():
+    ctx = cue.Context()
+
+    val = ctx.compile("null")
+    assert cue.Kind.NULL == val.kind()
+
+    val = ctx.compile("true")
+    assert cue.Kind.BOOL == val.kind()
+
+    val = ctx.compile("42")
+    assert cue.Kind.INT == val.kind()
+
+    val = ctx.compile("1.2345")
+    assert cue.Kind.FLOAT == val.kind()
+
+    val = ctx.compile('"hello"')
+    assert cue.Kind.STRING == val.kind()
+
+    val = ctx.compile("'world'")
+    assert cue.Kind.BYTES == val.kind()
+
+    val = ctx.compile("{ x: 42 }")
+    assert cue.Kind.STRUCT == val.kind()
+
+    val = ctx.compile('[ 1, "two", { x: 3 } ]')
+    assert cue.Kind.LIST == val.kind()
+
+def test_incomplete_kind():
+    ctx = cue.Context()
+
+    val = ctx.bottom()
+    assert cue.Kind.BOTTOM == val.incomplete_kind()
+
+    val = ctx.compile("bool")
+    assert cue.Kind.BOOL == val.incomplete_kind()
+
+    val = ctx.compile("int")
+    assert cue.Kind.INT == val.incomplete_kind()
+
+    val = ctx.compile("float")
+    assert cue.Kind.FLOAT == val.incomplete_kind()
+
+    val = ctx.compile('"string"')
+    assert cue.Kind.STRING == val.incomplete_kind()
+
+    val = ctx.compile("bytes")
+    assert cue.Kind.BYTES == val.incomplete_kind()
+
+    val = ctx.compile("{ x: int }")
+    assert cue.Kind.STRUCT == val.incomplete_kind()
+
+    val = ctx.compile('[int, float, string]')
+    assert cue.Kind.LIST == val.incomplete_kind()
+
+    val = ctx.top()
+    assert cue.Kind.TOP == val.incomplete_kind()

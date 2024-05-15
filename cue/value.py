@@ -15,6 +15,7 @@
 from typing import Any, Optional, final
 from cue.error import Error
 from cue.eval import EvalOption, encode_eval_opts
+from cue.kind import Kind, to_kind
 import libcue
 
 from typing import TYPE_CHECKING
@@ -71,6 +72,12 @@ class Value:
 
     def default(self) -> Optional['Value']:
         return _default(self)
+
+    def kind(self) -> Kind:
+        return to_kind[libcue.concrete_kind(self._val)]
+
+    def incomplete_kind(self) -> Kind:
+        return to_kind[libcue.incomplete_kind(self._val)]
 
     def check_schema(self, schema: 'Value', *opts: EvalOption) -> None:
         eval_opts = encode_eval_opts(*opts)

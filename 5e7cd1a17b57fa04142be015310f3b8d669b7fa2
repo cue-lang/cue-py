@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b0f4da6_ce2bd644",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1017723
+      },
+      "writtenOn": "2024-05-15T16:03:27Z",
+      "side": 1,
+      "message": "Proof that CI works via `ci/test` on GitHub:\n\nhttps://github.com/cue-lang/cue-py/actions/runs/9098945137",
+      "revId": "5e7cd1a17b57fa04142be015310f3b8d669b7fa2",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}

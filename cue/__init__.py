@@ -38,6 +38,11 @@ from .eval import (
     Schema,
 )
 from .kind import Kind
+from .result import (
+    Err,
+    Ok,
+    Result,
+)
 from .value import Value
 
 __all__ = [
@@ -49,6 +54,7 @@ __all__ = [
     'Definitions',
     'DisallowCycles',
     'Docs',
+    'Err',
     'Error',
     'ErrorsAsValues',
     'EvalOption',
@@ -59,8 +65,10 @@ __all__ = [
     'InferBuiltins',
     'InlineImports',
     'Kind',
+    'Ok',
     'Optionals',
     'Raw',
+    'Result',
     'Schema',
     'Scope',
     'Value',

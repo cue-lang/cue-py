@@ -20,6 +20,7 @@ from typing import Any, Optional, final
 from cue.error import Error
 from cue.eval import EvalOption, encode_eval_opts
 from cue.kind import Kind, to_kind
+from cue.result import Result, Ok, Err
 import libcue
 
 from typing import TYPE_CHECKING
@@ -243,6 +244,26 @@ class Value:
         https://pkg.go.dev/cuelang.org/go/cue#Value.IncompleteKind
         """
         return to_kind[libcue.incomplete_kind(self._val)]
+
+    def error(self) -> Result['Value', str]:
+        """
+        Extract the potential error from a value.
+
+        Returns:
+            Result['Value', str]: the value itself, if there is no error, or the CUE error as a string if there is one.
+        """
+        err = libcue.value_error(self._val)
+        if err != 0:
+            c_str = libcue.error_string(err)
+
+            dec = libcue.ffi.string(c_str)
+            if not isinstance(dec, bytes):
+                raise TypeError
+
+            s = dec.decode("utf-8")
+            libcue.libc_free(c_str)
+            return Err(s)
+        return Ok(self)
 
     def check_schema(self, schema: 'Value', *opts: EvalOption) -> None:
         """

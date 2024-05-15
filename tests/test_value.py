@@ -293,3 +293,16 @@ def test_incomplete_kind():
 
     val = ctx.top()
     assert cue.Kind.TOP == val.incomplete_kind()
+
+def test_error():
+    ctx = cue.Context()
+
+    a = ctx.compile("int")
+    b = ctx.compile("42")
+    c = ctx.compile("true")
+
+    v = a.unify(b)
+    assert isinstance(v.error(), cue.Ok)
+
+    err = b.unify(c).error()
+    assert isinstance(err, cue.Err) and err.err == "conflicting values 42 and true (mismatched types int and bool)"

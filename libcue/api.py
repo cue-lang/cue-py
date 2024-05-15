@@ -241,6 +241,9 @@ def concrete_kind(v: int) -> int:
 def incomplete_kind(v: int) -> int:
     return lib.cue_incomplete_kind(v)
 
+def value_error(v: int) -> int:
+    return lib.cue_value_error(v)
+
 def is_equal(x: int, y: int) -> bool:
     return lib.cue_is_equal(x, y)
 

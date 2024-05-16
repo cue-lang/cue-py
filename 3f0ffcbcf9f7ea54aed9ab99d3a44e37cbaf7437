@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27d533f0_82341cda",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1017720
+      },
+      "writtenOn": "2024-05-16T09:55:37Z",
+      "side": 1,
+      "message": "This code is rather repetitive, I wonder to what degree we could e.g. handle all string or boolean options with the same code.",
+      "revId": "3f0ffcbcf9f7ea54aed9ab99d3a44e37cbaf7437",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}

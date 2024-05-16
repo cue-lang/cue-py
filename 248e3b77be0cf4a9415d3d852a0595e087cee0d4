@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "260711e9_bf67922d",
+        "filename": "libcue/api.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1017720
+      },
+      "writtenOn": "2024-05-16T08:45:40Z",
+      "side": 1,
+      "message": "can you document what this is for?",
+      "revId": "248e3b77be0cf4a9415d3d852a0595e087cee0d4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "102a9733_828048b4",
+        "filename": "libcue/api.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1017720
+      },
+      "writtenOn": "2024-05-16T08:45:40Z",
+      "side": 1,
+      "message": "did you pick very short names like \"bopt\" and \"eopt\" names on purpose? wouldn\u0027t they confuse end users?",
+      "revId": "248e3b77be0cf4a9415d3d852a0595e087cee0d4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12d2e828_d51d6922",
+        "filename": "libcue/api.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1017720
+      },
+      "writtenOn": "2024-05-16T08:45:40Z",
+      "side": 1,
+      "message": "are you mixing space indentation with tabs in the middle of the line on purpose? that seems rather odd. also, some lines above like 37 use both spaces and tabs to indent.",
+      "revId": "248e3b77be0cf4a9415d3d852a0595e087cee0d4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}

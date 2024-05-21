@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e488b4ab_76756ff3",
+        "filename": "libcue/api.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1013536
+      },
+      "writtenOn": "2024-05-21T20:39:20Z",
+      "side": 1,
+      "message": "I guess these are C names, where this is usual. As long as that is not included in the Python interface. It would be great if there is some documentation.",
+      "parentUuid": "102a9733_828048b4",
+      "revId": "248e3b77be0cf4a9415d3d852a0595e087cee0d4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "12d2e828_d51d6922",
         "filename": "libcue/api.py",
         "patchSetId": 1

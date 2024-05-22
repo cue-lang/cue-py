@@ -18,6 +18,7 @@ Perform operations on CUE values.
 
 from typing import Any, Optional, final
 from cue.error import Error
+from cue.eval import EvalOption, encode_eval_opts
 import libcue
 
 from typing import TYPE_CHECKING
@@ -224,6 +225,44 @@ class Value:
             Optional[Value]: the default value, if it exists, or None otherwise.
         """
         return _default(self)
+
+    def check_schema(self, schema: 'Value', *opts: EvalOption) -> None:
+        """
+        Ensure a value conforms to a schema.
+
+        Args:
+            schema: CUE schema to check against.
+            *opts: evaluation options.
+
+        Raises:
+            Error: if the value does not conform to the schema.
+
+        Corresponding Go functionality is documented at:
+        https://pkg.go.dev/cuelang.org/go/cue#Value.Subsume
+        """
+
+        eval_opts = encode_eval_opts(*opts)
+        err = libcue.instance_of(self._val, schema._val, eval_opts)
+        if err != 0:
+            raise Error(err)
+
+    def validate(self, *opts: EvalOption) -> None:
+        """
+        Ensure the value does not contain errors.
+
+        Corresponding Go functionality is documented at:
+        https://pkg.go.dev/cuelang.org/go/cue#Value.Validate
+
+        Args:
+            *opts: evaluation options.
+
+        Raises:
+            Error: if the value contains errors.
+        """
+        eval_opts = encode_eval_opts(*opts)
+        err = libcue.validate(self._val, eval_opts)
+        if err != 0:
+            raise Error(err)
 
 def _to_int(val: Value) -> int:
     ptr = libcue.ffi.new("int64_t*")

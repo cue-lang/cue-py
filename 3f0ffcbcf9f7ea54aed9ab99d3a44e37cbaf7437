@@ -16,6 +16,24 @@
       "message": "This code is rather repetitive, I wonder to what degree we could e.g. handle all string or boolean options with the same code.",
       "revId": "3f0ffcbcf9f7ea54aed9ab99d3a44e37cbaf7437",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d9a4f57_3bb5d312",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003505
+      },
+      "writtenOn": "2024-05-22T17:29:18Z",
+      "side": 1,
+      "message": "I don\u0027t think that is possible while keeping the code strongly-typed, and keeping the code strongly-typed is the point. For some very minor duplication here our users get an API that is more robust and can\u0027t be misused. And this matches the Java API.",
+      "parentUuid": "27d533f0_82341cda",
+      "revId": "3f0ffcbcf9f7ea54aed9ab99d3a44e37cbaf7437",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }

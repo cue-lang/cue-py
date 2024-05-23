@@ -36,6 +36,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9922c50_bd8d56dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1017720
+      },
+      "writtenOn": "2024-05-23T08:51:41Z",
+      "side": 1,
+      "message": "Ack, thanks. Please make sure to insert CI as early as you can in the stack.",
+      "parentUuid": "19c75429_84c06d33",
+      "revId": "248e3b77be0cf4a9415d3d852a0595e087cee0d4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "260711e9_bf67922d",
@@ -155,6 +173,24 @@
       "side": 1,
       "message": "Yes, this is on purpose because this is literal libcue code, which uses tabs (because it is C code).\n\nSame happening on line 37, we need the initial spaces because this is Python, but the struct itself comes from C, which uses tabs.\n\nSince this is (almost) literal libcue code, it seems a good idea to just copy-paste it here rather than edit it which has the risk of diverging from libcue with very difficult to debug bugs.",
       "parentUuid": "12d2e828_d51d6922",
+      "revId": "248e3b77be0cf4a9415d3d852a0595e087cee0d4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57f9c2c6_bbbbd166",
+        "filename": "libcue/api.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1017720
+      },
+      "writtenOn": "2024-05-23T08:51:41Z",
+      "side": 1,
+      "message": "Ack, I would make that an explicit comment to document the reasoning. Many editors or code viewers will treat or show the mixed indentation as a weird quirk.",
+      "parentUuid": "94832cf5_008198bb",
       "revId": "248e3b77be0cf4a9415d3d852a0595e087cee0d4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }

@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# CI might build libcue locally, in which case we want it ignored.
+libcue-checkout/
+
 # C extensions
 *.a
 *.so

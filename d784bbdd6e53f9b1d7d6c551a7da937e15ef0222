@@ -1,0 +1,129 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6070db69_14d84247",
+        "filename": "cue/__init__.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1017720
+      },
+      "writtenOn": "2024-05-30T09:11:38Z",
+      "side": 1,
+      "message": "\"CUE\u0027s Go API\" to be clearer?",
+      "range": {
+        "startLine": 21,
+        "startChar": 44,
+        "endLine": 21,
+        "endChar": 47
+      },
+      "revId": "d784bbdd6e53f9b1d7d6c551a7da937e15ef0222",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df7b4e81_3bb5f973",
+        "filename": "cue/__init__.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1017720
+      },
+      "writtenOn": "2024-05-30T09:11:38Z",
+      "side": 1,
+      "message": "FYI, you could also link to one of the guides for the Go API; the main one appears to be https://cuelang.org/docs/concept/how-cue-works-with-go/#using-cues-go-api",
+      "revId": "d784bbdd6e53f9b1d7d6c551a7da937e15ef0222",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "350b4e3d_516cdbfb",
+        "filename": "cue/context.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1017720
+      },
+      "writtenOn": "2024-05-30T09:11:38Z",
+      "side": 1,
+      "message": "perhaps \"A context allows creating CUE values\"?",
+      "revId": "d784bbdd6e53f9b1d7d6c551a7da937e15ef0222",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9709bc65_0395db7e",
+        "filename": "cue/context.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1017720
+      },
+      "writtenOn": "2024-05-30T09:11:38Z",
+      "side": 1,
+      "message": "wouldn\u0027t you normally say `opts` rather than `*opts`?",
+      "revId": "d784bbdd6e53f9b1d7d6c551a7da937e15ef0222",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "341d545b_99b7d19c",
+        "filename": "cue/value.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1017720
+      },
+      "writtenOn": "2024-05-30T09:11:38Z",
+      "side": 1,
+      "message": "this list appears incomplete compared to Go\u0027s cue.Value.Kind: Top and Float are missing, and Bottom is renamed to Error. Is this on purpose for the sake of being friendly to Python? if so, are those changes/quirks documented somewhere?",
+      "revId": "d784bbdd6e53f9b1d7d6c551a7da937e15ef0222",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1191397d_29c62cc2",
+        "filename": "tests/__init__.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1017720
+      },
+      "writtenOn": "2024-05-30T09:11:38Z",
+      "side": 1,
+      "message": "does this need some sort of TODO to fill this file, or can this file go entirely?",
+      "revId": "d784bbdd6e53f9b1d7d6c551a7da937e15ef0222",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "001bcfa9_3654340e",
+        "filename": "tests/test_context.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1017720
+      },
+      "writtenOn": "2024-05-30T09:11:38Z",
+      "side": 1,
+      "message": "I haven\u0027t seen top-level strings like this in Python before - does this do anything more than a comment would?",
+      "revId": "d784bbdd6e53f9b1d7d6c551a7da937e15ef0222",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}

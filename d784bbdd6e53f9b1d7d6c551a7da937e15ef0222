@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e800e573_b63c1e8a",
+        "filename": "cue/__init__.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1003505
+      },
+      "writtenOn": "2024-05-31T13:46:55Z",
+      "side": 1,
+      "message": "I think the fact that CUE is implemented in Go is just an implementation detail, so I would rather not mention it here. Go is a very leaky implementation detail, so we can\u0027t really avoid mentioning Go for now (hence the last paragraph), but for a Python user it should be irrelevant that this API is backed by a Go API. Especially I don\u0027t think it should be the first sentence they hear while reading the docs!\n\nHappy to use a different phrasing though.",
+      "parentUuid": "6070db69_14d84247",
+      "range": {
+        "startLine": 21,
+        "startChar": 44,
+        "endLine": 21,
+        "endChar": 47
+      },
+      "revId": "d784bbdd6e53f9b1d7d6c551a7da937e15ef0222",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "df7b4e81_3bb5f973",
         "filename": "cue/__init__.py",
         "patchSetId": 5
@@ -37,6 +61,24 @@
       "writtenOn": "2024-05-30T09:11:38Z",
       "side": 1,
       "message": "FYI, you could also link to one of the guides for the Go API; the main one appears to be https://cuelang.org/docs/concept/how-cue-works-with-go/#using-cues-go-api",
+      "revId": "d784bbdd6e53f9b1d7d6c551a7da937e15ef0222",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14a9f14a_8cf7bfa4",
+        "filename": "cue/__init__.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1003505
+      },
+      "writtenOn": "2024-05-31T13:46:55Z",
+      "side": 1,
+      "message": "I thought of this, I am not sure if it\u0027s a good idea TBH. We\u0027re in this weird interim state where we don\u0027t have high-level Python docs, but this will change very soon and I will link to Python guide then.\n\nThe Go API doesn\u0027t link to high-level guides either. It\u0027s just the API docs.\n\nAnd I would avoiding mentioning Go as much as possible (it\u0027s impossible ATM).",
+      "parentUuid": "df7b4e81_3bb5f973",
       "revId": "d784bbdd6e53f9b1d7d6c551a7da937e15ef0222",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -60,6 +102,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4f3186d0_8082aa23",
+        "filename": "cue/context.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1003505
+      },
+      "writtenOn": "2024-05-31T13:46:55Z",
+      "side": 1,
+      "message": "I don\u0027t think so, Python doesn\u0027t use Go documentation conventions. The first line here is what users see when they hover over a Context in their IDE.",
+      "parentUuid": "350b4e3d_516cdbfb",
+      "revId": "d784bbdd6e53f9b1d7d6c551a7da937e15ef0222",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9709bc65_0395db7e",
         "filename": "cue/context.py",
         "patchSetId": 5
@@ -71,6 +131,24 @@
       "writtenOn": "2024-05-30T09:11:38Z",
       "side": 1,
       "message": "wouldn\u0027t you normally say `opts` rather than `*opts`?",
+      "revId": "d784bbdd6e53f9b1d7d6c551a7da937e15ef0222",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3965263_a523df1a",
+        "filename": "cue/context.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1003505
+      },
+      "writtenOn": "2024-05-31T13:46:55Z",
+      "side": 1,
+      "message": "No, it\u0027s `*opts`. Remember that until recently Python didn\u0027t even have types. There was no way to know if an argument is variable-length unless it was documented as `*such`.",
+      "parentUuid": "9709bc65_0395db7e",
       "revId": "d784bbdd6e53f9b1d7d6c551a7da937e15ef0222",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -92,6 +170,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ce46b13_dcc59c74",
+        "filename": "cue/value.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1003505
+      },
+      "writtenOn": "2024-05-31T13:46:55Z",
+      "side": 1,
+      "message": "It\u0027s just copy-pasted from Go\u0027s API, but I removed references to kinds.",
+      "parentUuid": "341d545b_99b7d19c",
+      "revId": "d784bbdd6e53f9b1d7d6c551a7da937e15ef0222",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1191397d_29c62cc2",
@@ -109,6 +205,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e4405ad_58ed5597",
+        "filename": "tests/__init__.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1003505
+      },
+      "writtenOn": "2024-05-31T13:46:55Z",
+      "side": 1,
+      "message": "The file is absolutely required, even though it is empty. Having an `__init__.py` makes the directory by a python module and allows `pytest` to find it. This is just how Python operates. The reason why you\u0027d have a non-empty `__init__.py` file would be if you needed to hide something from your module, but this is not the case here.\n\nThis is just standard Python practice, there is no need to document using empty `__init__.py` for its side effects.\n\nThe docstring is also necessary otherwise pydoc (and maybe IDEs?, not sure) will print the license header as documentation.",
+      "parentUuid": "1191397d_29c62cc2",
+      "revId": "d784bbdd6e53f9b1d7d6c551a7da937e15ef0222",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "001bcfa9_3654340e",
@@ -122,6 +236,24 @@
       "writtenOn": "2024-05-30T09:11:38Z",
       "side": 1,
       "message": "I haven\u0027t seen top-level strings like this in Python before - does this do anything more than a comment would?",
+      "revId": "d784bbdd6e53f9b1d7d6c551a7da937e15ef0222",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1798d3fe_ad726f43",
+        "filename": "tests/test_context.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1003505
+      },
+      "writtenOn": "2024-05-31T13:46:55Z",
+      "side": 1,
+      "message": "Python files are modules, and they have metadata available at runtime. This is how you are supposed to document them, with strings rather than comments.\n\nNote that we have to put a docstring here because otherwise `pydoc` would print the license header above as documentation 🤦‍♀️.",
+      "parentUuid": "001bcfa9_3654340e",
       "revId": "d784bbdd6e53f9b1d7d6c551a7da937e15ef0222",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }

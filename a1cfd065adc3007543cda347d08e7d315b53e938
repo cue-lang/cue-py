@@ -16,6 +16,24 @@
       "message": "I\u0027d make this a let field as well, like pythonVersionVal",
       "revId": "a1cfd065adc3007543cda347d08e7d315b53e938",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "024527d7_84d0fc6c",
+        "filename": "internal/ci/github/trybot.cue",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1003505
+      },
+      "writtenOn": "2024-05-31T13:46:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17ad6b8b_1cdc4583",
+      "revId": "a1cfd065adc3007543cda347d08e7d315b53e938",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1948b95_7a0f9bdc",
+        "filename": "cue/value.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1017720
+      },
+      "writtenOn": "2024-06-03T14:12:33Z",
+      "side": 1,
+      "message": "interesting, why is the naming of Subsume in libcue and cue-py all over the place? we go from Subsume to instance_of and then check_schema. I find this rather confusing.",
+      "revId": "e4632a46953c239f1d14711481b3d33193b6d9d7",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}

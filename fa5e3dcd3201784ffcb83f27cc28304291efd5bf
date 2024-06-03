@@ -22,6 +22,30 @@
       },
       "revId": "fa5e3dcd3201784ffcb83f27cc28304291efd5bf",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62b529d6_701ed945",
+        "filename": "cue/value.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1003505
+      },
+      "writtenOn": "2024-06-03T14:40:46Z",
+      "side": 1,
+      "message": "Yes, this is intentional (and mirrors Java and soon Rust).",
+      "parentUuid": "115852cd_cd5206bb",
+      "range": {
+        "startLine": 223,
+        "startChar": 62,
+        "endLine": 223,
+        "endChar": 79
+      },
+      "revId": "fa5e3dcd3201784ffcb83f27cc28304291efd5bf",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }

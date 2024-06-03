@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e52e1f65_4a7515ac",
+        "filename": "tests/test_value.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1017720
+      },
+      "writtenOn": "2024-06-03T14:07:01Z",
+      "side": 1,
+      "message": "what about `val.lookup(\"x.y.b\")`? does that work or not? I would expect it to work, given https://pkg.go.dev/cuelang.org/go/cue@master#Path in Go, but we would need a test case either way to make sure.",
+      "revId": "6d037c2d58cfffc2ad2e969b107bd8e7a0440849",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}

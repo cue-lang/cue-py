@@ -1,0 +1,9 @@
+Code-Review+2: Daniel Martí <mvdan@mvdan.cc>
+TryBot-Result+1: CUEcueckoo <cueckoo@cuelang.org>
+Submitted-by: Aram Hăvărneanu <aram@cue.works>
+Submitted-at: Mon, 03 Jun 2024 17:13:22 +0000
+Reviewed-on: https://review.gerrithub.io/c/cue-lang/cue-py/+/1194797
+Comments-Total: 14
+Comments-Unresolved: 3
+Project: cue-lang/cue-py
+Branch: refs/heads/main

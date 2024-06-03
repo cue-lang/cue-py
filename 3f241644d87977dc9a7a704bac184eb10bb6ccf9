@@ -18,6 +18,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0a4e238_e37cb83d",
+        "filename": "tests/test_value.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1003505
+      },
+      "writtenOn": "2024-06-03T17:14:06Z",
+      "side": 1,
+      "message": "Yes, added.",
+      "parentUuid": "301af7ca_91d59fe7",
+      "revId": "3f241644d87977dc9a7a704bac184eb10bb6ccf9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "52ea9829_8569b4e6",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-06-03T14:05:15Z",
       "side": 1,
       "message": "isn\u0027t this missing a to_unsigned positive test case?",
+      "revId": "3f241644d87977dc9a7a704bac184eb10bb6ccf9",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5941b488_cf16ba56",
+        "filename": "tests/test_value.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1003505
+      },
+      "writtenOn": "2024-06-03T17:14:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52ea9829_8569b4e6",
       "revId": "3f241644d87977dc9a7a704bac184eb10bb6ccf9",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c92bae2_e1b73226",
+        "filename": "cue/value.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1013536
+      },
+      "writtenOn": "2024-06-04T08:23:07Z",
+      "side": 1,
+      "message": "I wonder if the return should be an error object that itself can be \"stringified\". This will allow us to add more structured data to errors in the future. We plan to do the same for the Go API.",
+      "revId": "61ea0f996cd4c40f3b97d709ae6fbf85a4643ffe",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}

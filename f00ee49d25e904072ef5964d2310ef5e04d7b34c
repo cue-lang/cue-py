@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e686fc19_64c84573",
+        "filename": "cue/value.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1013536
+      },
+      "writtenOn": "2024-06-04T08:51:11Z",
+      "side": 1,
+      "message": "I guess it should be \"taking only regular fields into account\"\n\nOR\n\nignoring any constraints, definitions or hidden fields. Or are these compared?\n\nWe should ensure it only compares data fields. That makes the most sense I think.\n\nThe Go docs are not that great.",
+      "revId": "f00ee49d25e904072ef5964d2310ef5e04d7b34c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6957138e_fc753a46",
+        "filename": "cue/value.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1013536
+      },
+      "writtenOn": "2024-06-04T08:51:11Z",
+      "side": 1,
+      "message": "We should not refer to the Go documentation in Python code.",
+      "revId": "f00ee49d25e904072ef5964d2310ef5e04d7b34c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dba00c32_b5ca142b",
+        "filename": "cue/value.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1013536
+      },
+      "writtenOn": "2024-06-04T08:51:11Z",
+      "side": 1,
+      "message": "I\u0027m not sure if I understand this sentence.",
+      "revId": "f00ee49d25e904072ef5964d2310ef5e04d7b34c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1efadf9d_e18e06a7",
+        "filename": "tests/test_value.py",
+        "patchSetId": 9
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1013536
+      },
+      "writtenOn": "2024-06-04T08:51:11Z",
+      "side": 1,
+      "message": "We should also have negative tests here, where we make clear what is NOT compared.",
+      "revId": "f00ee49d25e904072ef5964d2310ef5e04d7b34c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}

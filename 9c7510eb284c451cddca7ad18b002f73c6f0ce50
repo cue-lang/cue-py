@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "215f6d8e_fcd2f85d",
+        "filename": "cue/value.py",
+        "patchSetId": 10
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1013536
+      },
+      "writtenOn": "2024-06-04T08:55:00Z",
+      "side": 1,
+      "message": "We should not refer to Go documentation. It is confusing.",
+      "revId": "9c7510eb284c451cddca7ad18b002f73c6f0ce50",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}

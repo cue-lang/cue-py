@@ -23,6 +23,7 @@ This module implements low-level bindings to libcue.
 
 from typing import Optional
 from cffi import FFI
+import sys
 
 ffi = FFI()
 
@@ -120,7 +121,26 @@ ffi.cdef("""
     void	libc_free(void*);
 """)
 
-lib = ffi.dlopen("cue")
+if sys.platform != "win32":
+    # When there are no more references to lib (such as when there
+    # are no more references to this module), the Python runtime can
+    # try to unload libcue. Go shared libraries cannot be unloaded.
+    # Pass RTLD_NODELETE to dlopen to prevent this.
+    #
+    # Note that RTLD_NODELETE is Unix-only, so on Windows we do
+    # something different (see below).
+    #
+    # Also note that the Python garbage collector could run at program
+    # exit and it could determine that there are no more references
+    # to libcue (because the program is exiting), triggering a
+    # premature and dangerous dlclose. This prevents it.
+    lib = ffi.dlopen("cue", ffi.RTLD_NODELETE)
+else:
+    # On Windows we don't have RTLD_NODELETE. Create an artificial
+    # global references to lib, so we prevent unloading the shared
+    # library.
+    lib = ffi.dlopen("cue")
+    sys.modules[__name__]._lib_reference = lib
 
 KIND_BOTTOM = lib.CUE_KIND_BOTTOM
 KIND_NULL = lib.CUE_KIND_NULL

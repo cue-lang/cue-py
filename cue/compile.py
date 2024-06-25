@@ -30,7 +30,7 @@ def compile(ctx: 'Context', s: str, *opts: BuildOption) -> Value:
     buf = libcue.ffi.new("char[]", s.encode("utf-8"))
 
     build_opts = encode_build_opts(*opts)
-    err = libcue.compile_string(ctx._ctx, buf, build_opts, val_ptr)
+    err = libcue.compile_string(ctx.res(), buf, build_opts, val_ptr)
     if err != 0:
         raise Error(err)
     return Value(ctx, val_ptr[0])
@@ -40,7 +40,7 @@ def compile_bytes(ctx: 'Context', buf: bytes, *opts: BuildOption) -> Value:
     buf_ptr = libcue.ffi.from_buffer(buf)
 
     build_opts = encode_build_opts(*opts)
-    err = libcue.compile_bytes(ctx._ctx, buf_ptr, len(buf), build_opts, val_ptr)
+    err = libcue.compile_bytes(ctx.res(), buf_ptr, len(buf), build_opts, val_ptr)
     if err != 0:
         raise Error(err)
     return Value(ctx, val_ptr[0])

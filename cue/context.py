@@ -21,6 +21,7 @@ from typing import final
 from cue.value import Value
 from cue.build import BuildOption
 from cue.compile import compile, compile_bytes
+from cue.res import Resource
 import libcue
 
 @final
@@ -35,13 +36,13 @@ class Context:
     https://pkg.go.dev/cuelang.org/go/cue#Context
     """
 
-    _ctx: int
+    _ctx: Resource
 
     def __init__(self):
-        self._ctx = libcue.newctx()
+        self._ctx = Resource(libcue.newctx())
 
-    def __del__(self):
-        libcue.free(self._ctx)
+    def res(self) -> int:
+        return self._ctx.res()
 
     @singledispatchmethod
     def compile(self, s, *opts: BuildOption) -> Value:
@@ -76,13 +77,13 @@ class Context:
         """
         Return an instance of CUE `_`.
         """
-        return Value(self, libcue.top(self._ctx))
+        return Value(self, libcue.top(self.res()))
 
     def bottom(self) -> Value:
         """
         Return an instance of CUE `_|_`.
         """
-        return Value(self, libcue.bottom(self._ctx))
+        return Value(self, libcue.bottom(self.res()))
 
     @singledispatchmethod
     def to_value(self, arg) -> Value:
@@ -99,25 +100,25 @@ class Context:
 
     @to_value.register
     def _(self, arg: int):
-        return Value(self, libcue.from_int64(self._ctx, arg))
+        return Value(self, libcue.from_int64(self.res(), arg))
 
     @to_value.register
     def _(self, arg: bool):
-        return Value(self, libcue.from_bool(self._ctx, arg))
+        return Value(self, libcue.from_bool(self.res(), arg))
 
     @to_value.register
     def _(self, arg: float):
-        return Value(self, libcue.from_double(self._ctx, arg))
+        return Value(self, libcue.from_double(self.res(), arg))
 
     @to_value.register
     def _(self, arg: str):
         c_str = libcue.ffi.new("char[]", arg.encode("utf-8"))
-        return Value(self, libcue.from_string(self._ctx, c_str))
+        return Value(self, libcue.from_string(self.res(), c_str))
 
     @to_value.register
     def _(self, arg: bytes):
         c_buf = libcue.ffi.from_buffer(arg)
-        return Value(self, libcue.from_bytes(self._ctx, c_buf, len(arg)))
+        return Value(self, libcue.from_bytes(self.res(), c_buf, len(arg)))
 
     def to_value_from_unsigned(self, arg: int) -> Value:
         """
@@ -131,4 +132,4 @@ class Context:
         Return:
             Value: the CUE value denoting arg.
         """
-        return Value(self, libcue.from_uint64(self._ctx, arg))
+        return Value(self, libcue.from_uint64(self.res(), arg))

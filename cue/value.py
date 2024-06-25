@@ -20,6 +20,7 @@ from typing import Any, Optional, final
 from cue.error import Error
 from cue.eval import EvalOption, encode_eval_opts
 from cue.kind import Kind, to_kind
+from cue.res import _Resource
 from cue.result import Result, Ok, Err
 import libcue
 
@@ -39,14 +40,14 @@ class Value:
     """
 
     _ctx: 'Context'
-    _val: int
+    _val: _Resource
 
     def __init__(self, ctx: 'Context', v: int):
         self._ctx = ctx
-        self._val = v
+        self._val = _Resource(v)
 
-    def __del__(self):
-        libcue.free(self._val)
+    def _res(self) -> int:
+        return self._val.res()
 
     def __eq__(self, other: Any) -> bool:
         """
@@ -65,7 +66,7 @@ class Value:
             bool: True if the two values are complete and equal CUE values, False otherwise.
         """
         if isinstance(other, Value):
-            return libcue.is_equal(self._val, other._val)
+            return libcue.is_equal(self._res(), other._res())
         return False
 
     def context(self) -> 'Context':
@@ -79,7 +80,7 @@ class Value:
         Corresponding Go functionality is documented at:
         https://pkg.go.dev/cuelang.org/go/cue#Value.Unify
         """
-        v = libcue.unify(self._val, other._val)
+        v = libcue.unify(self._res(), other._res())
         return Value(self._ctx, v)
 
     def lookup(self, path: str) -> 'Value':
@@ -234,7 +235,7 @@ class Value:
         Corresponding Go functionality is documented at:
         https://pkg.go.dev/cuelang.org/go/cue#Value.Kind
         """
-        return to_kind[libcue.concrete_kind(self._val)]
+        return to_kind[libcue.concrete_kind(self._res())]
 
     def incomplete_kind(self) -> Kind:
         """
@@ -243,7 +244,7 @@ class Value:
         Corresponding Go functionality is documented at:
         https://pkg.go.dev/cuelang.org/go/cue#Value.IncompleteKind
         """
-        return to_kind[libcue.incomplete_kind(self._val)]
+        return to_kind[libcue.incomplete_kind(self._res())]
 
     def error(self) -> Result['Value', str]:
         """
@@ -252,7 +253,7 @@ class Value:
         Returns:
             Result['Value', str]: the value itself, if there is no error, or the CUE error as a string if there is one.
         """
-        err = libcue.value_error(self._val)
+        err = libcue.value_error(self._res())
         if err != 0:
             c_str = libcue.error_string(err)
 
@@ -281,7 +282,7 @@ class Value:
         """
 
         eval_opts = encode_eval_opts(*opts)
-        err = libcue.instance_of(self._val, schema._val, eval_opts)
+        err = libcue.instance_of(self._res(), schema._res(), eval_opts)
         if err != 0:
             raise Error(err)
 
@@ -299,41 +300,41 @@ class Value:
             Error: if the value contains errors.
         """
         eval_opts = encode_eval_opts(*opts)
-        err = libcue.validate(self._val, eval_opts)
+        err = libcue.validate(self._res(), eval_opts)
         if err != 0:
             raise Error(err)
 
 def _to_int(val: Value) -> int:
     ptr = libcue.ffi.new("int64_t*")
-    err = libcue.dec_int64(val._val, ptr)
+    err = libcue.dec_int64(val._res(), ptr)
     if err != 0:
         raise Error(err)
     return ptr[0]
 
 def _to_unsigned(val: Value) -> int:
     ptr = libcue.ffi.new("uint64_t*")
-    err = libcue.dec_uint64(val._val, ptr)
+    err = libcue.dec_uint64(val._res(), ptr)
     if err != 0:
         raise Error(err)
     return ptr[0]
 
 def _to_bool(val: Value) -> bool:
     ptr = libcue.ffi.new("bool*")
-    err = libcue.dec_bool(val._val, ptr)
+    err = libcue.dec_bool(val._res(), ptr)
     if err != 0:
         raise Error(err)
     return ptr[0]
 
 def _to_float(val: Value) -> float:
     ptr = libcue.ffi.new("double*")
-    err = libcue.dec_double(val._val, ptr)
+    err = libcue.dec_double(val._res(), ptr)
     if err != 0:
         raise Error(err)
     return ptr[0]
 
 def _to_str(val: Value) -> str:
     ptr = libcue.ffi.new("char**")
-    err = libcue.dec_string(val._val, ptr)
+    err = libcue.dec_string(val._res(), ptr)
     if err != 0:
         raise Error(err)
 
@@ -349,7 +350,7 @@ def _to_bytes(val: Value) -> bytes:
     buf_ptr = libcue.ffi.new("uint8_t**")
     len_ptr = libcue.ffi.new("size_t*")
 
-    err = libcue.dec_bytes(val._val, buf_ptr, len_ptr)
+    err = libcue.dec_bytes(val._res(), buf_ptr, len_ptr)
     if err != 0:
         raise Error(err)
 
@@ -367,7 +368,7 @@ def _to_json(val: Value) -> str:
     buf_ptr = libcue.ffi.new("uint8_t**")
     len_ptr = libcue.ffi.new("size_t*")
 
-    err = libcue.dec_json(val._val, buf_ptr, len_ptr)
+    err = libcue.dec_json(val._res(), buf_ptr, len_ptr)
     if err != 0:
         raise Error(err)
 
@@ -383,14 +384,14 @@ def _lookup(val: Value, path: str) -> Value:
     val_ptr = libcue.ffi.new("cue_value*")
     path_ptr = libcue.ffi.new("char[]", path.encode("utf-8"))
 
-    err = libcue.lookup_string(val._val, path_ptr, val_ptr)
+    err = libcue.lookup_string(val._res(), path_ptr, val_ptr)
     if err != 0:
         raise Error(err)
     return Value(val._ctx, val_ptr[0])
 
 def _default(val: Value) -> Optional[Value]:
     ok_ptr = libcue.ffi.new("bool*")
-    res = libcue.default(val._val, ok_ptr)
+    res = libcue.default(val._res(), ok_ptr)
     if ok_ptr[0] == 1:
         return Value(val._ctx, res)
     return None

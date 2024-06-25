@@ -17,6 +17,7 @@ Handle CUE errors.
 """
 
 from typing import final
+from cue.res import _Resource
 import libcue
 
 @final
@@ -25,16 +26,16 @@ class Error(Exception):
     CUE evaluation error.
     """
 
-    _err: int
+    _err: _Resource
+
+    def _res(self):
+        return self._err.res()
 
     def __init__(self, err: int):
-        self._err = err
+        self._err = _Resource(err)
 
     def __str__(self):
-        c_str = libcue.error_string(self._err)
+        c_str = libcue.error_string(self._res())
         s = libcue.ffi.string(c_str).decode("utf-8")
         libcue.libc_free(c_str)
         return s
-
-    def __del__(self):
-        libcue.free(self._err)

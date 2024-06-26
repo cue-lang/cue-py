@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76f50ee4_5673a959",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1007275
+      },
+      "writtenOn": "2024-06-26T14:19:33Z",
+      "side": 1,
+      "message": "LGTM in general, but with reservations about whether the resource values should be part of the public API. WDYT?",
+      "revId": "84a3144fe2d58178450bc9fde35b6abef29f4bf4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ec6fa0f_07d60699",
+        "filename": "cue/compile.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1007275
+      },
+      "writtenOn": "2024-06-26T14:19:33Z",
+      "side": 1,
+      "message": "out of interest, why is this `\u0027Context\u0027` rather than `Context` ?",
+      "revId": "84a3144fe2d58178450bc9fde35b6abef29f4bf4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e56ac685_ce92f205",
+        "filename": "cue/context.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1007275
+      },
+      "writtenOn": "2024-06-26T14:19:33Z",
+      "side": 1,
+      "message": "Similarly to Value, should this really be part of the public API?",
+      "revId": "84a3144fe2d58178450bc9fde35b6abef29f4bf4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5500c07_12cae46d",
+        "filename": "cue/res.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1007275
+      },
+      "writtenOn": "2024-06-26T14:19:33Z",
+      "side": 1,
+      "message": "Is this intended to be part of the public API?",
+      "revId": "84a3144fe2d58178450bc9fde35b6abef29f4bf4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b808e4f_2a61fe5f",
+        "filename": "cue/res.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1007275
+      },
+      "writtenOn": "2024-06-26T14:19:33Z",
+      "side": 1,
+      "message": "Could we please have a doc comment on this to say what it\u0027s for (and perhaps why it exists and how it works for those of us not too clued up in the Python runtime) ?",
+      "revId": "84a3144fe2d58178450bc9fde35b6abef29f4bf4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb43d0ba_2def40f4",
+        "filename": "cue/value.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1007275
+      },
+      "writtenOn": "2024-06-26T14:19:33Z",
+      "side": 1,
+      "message": "doc comment please. Also, does this actually have to be public? It feels more like an implementation detail to me than part of the public API.",
+      "revId": "84a3144fe2d58178450bc9fde35b6abef29f4bf4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65a1a4f5_5d599323",
+        "filename": "libcue/api.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1007275
+      },
+      "writtenOn": "2024-06-26T14:19:33Z",
+      "side": 1,
+      "message": "```suggestion\n    # global reference to lib, so we prevent unloading the shared\n```",
+      "revId": "84a3144fe2d58178450bc9fde35b6abef29f4bf4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}

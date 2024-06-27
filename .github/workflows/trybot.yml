@@ -20,6 +20,7 @@ jobs:
         runner:
           - ubuntu-22.04
           - macos-14
+          - windows-2022
     runs-on: ${{ matrix.runner }}
     defaults:
       run:
@@ -176,7 +177,10 @@ jobs:
       - name: mypy
         run: mypy .
       - name: pytest
-        run: pytest
+        run: |-
+          echo "${{ github.workspace }}/libcue-checkout" >> $GITHUB_PATH
+          echo $PATH
+          pytest
         env:
           LD_LIBRARY_PATH: ${{ github.workspace }}/libcue-checkout
           DYLD_LIBRARY_PATH: ${{ github.workspace }}/libcue-checkout

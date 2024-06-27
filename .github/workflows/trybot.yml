@@ -18,7 +18,9 @@ jobs:
         python-version:
           - "3.12"
         runner:
+          - ubuntu-22.04
           - macos-14
+          - windows-2022
     runs-on: ${{ matrix.runner }}
     defaults:
       run:

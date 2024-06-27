@@ -175,6 +175,9 @@ jobs:
         working-directory: libcue-checkout
       - name: mypy
         run: mypy .
+      - if: runner.os == 'Windows'
+        name: Add libcue to PATH
+        run: echo '${{ github.workspace }}/libcue-checkout' >> $GITHUB_PATH
       - name: pytest
         run: pytest
         env:

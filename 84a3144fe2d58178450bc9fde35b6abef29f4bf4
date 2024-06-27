@@ -35,6 +35,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d132751_f825e245",
+        "filename": "cue/compile.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1003505
+      },
+      "writtenOn": "2024-06-27T11:35:09Z",
+      "side": 1,
+      "message": "Because `Context` would cause a circular import which is a runtime error in Python. Note that it\u0027s not any string, the type checker checks and uses this. It\u0027s just a Python quirk.",
+      "parentUuid": "3ec6fa0f_07d60699",
+      "revId": "84a3144fe2d58178450bc9fde35b6abef29f4bf4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e56ac685_ce92f205",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-06-26T14:19:33Z",
       "side": 1,
       "message": "Similarly to Value, should this really be part of the public API?",
+      "revId": "84a3144fe2d58178450bc9fde35b6abef29f4bf4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdb62b38_5f4730ef",
+        "filename": "cue/context.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1003505
+      },
+      "writtenOn": "2024-06-27T11:35:09Z",
+      "side": 1,
+      "message": "No, fixed.",
+      "parentUuid": "e56ac685_ce92f205",
       "revId": "84a3144fe2d58178450bc9fde35b6abef29f4bf4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -69,6 +105,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9eed1d6_505a70fd",
+        "filename": "cue/res.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1003505
+      },
+      "writtenOn": "2024-06-27T11:35:09Z",
+      "side": 1,
+      "message": "No, but it\u0027s not exported from the `cue` package (see `__all__.py`). I have renamed it to `_Resource` to reduce potential confusion further. Btw, there is no way to prevent users from really using this if they really want it. Everything is accessible in Python.",
+      "parentUuid": "f5500c07_12cae46d",
+      "revId": "84a3144fe2d58178450bc9fde35b6abef29f4bf4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4b808e4f_2a61fe5f",
@@ -82,6 +136,24 @@
       "writtenOn": "2024-06-26T14:19:33Z",
       "side": 1,
       "message": "Could we please have a doc comment on this to say what it\u0027s for (and perhaps why it exists and how it works for those of us not too clued up in the Python runtime) ?",
+      "revId": "84a3144fe2d58178450bc9fde35b6abef29f4bf4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df586b07_2d89cd18",
+        "filename": "cue/res.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1003505
+      },
+      "writtenOn": "2024-06-27T11:35:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b808e4f_2a61fe5f",
       "revId": "84a3144fe2d58178450bc9fde35b6abef29f4bf4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
@@ -103,6 +175,24 @@
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c777f64b_cc1a11d7",
+        "filename": "cue/value.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1003505
+      },
+      "writtenOn": "2024-06-27T11:35:09Z",
+      "side": 1,
+      "message": "Made it private, well, at least as private as python allows.",
+      "parentUuid": "fb43d0ba_2def40f4",
+      "revId": "84a3144fe2d58178450bc9fde35b6abef29f4bf4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "65a1a4f5_5d599323",
@@ -116,6 +206,24 @@
       "writtenOn": "2024-06-26T14:19:33Z",
       "side": 1,
       "message": "```suggestion\n    # global reference to lib, so we prevent unloading the shared\n```",
+      "revId": "84a3144fe2d58178450bc9fde35b6abef29f4bf4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b32a47c_dfc7a396",
+        "filename": "libcue/api.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1003505
+      },
+      "writtenOn": "2024-06-27T11:35:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65a1a4f5_5d599323",
       "revId": "84a3144fe2d58178450bc9fde35b6abef29f4bf4",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }

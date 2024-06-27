@@ -20,6 +20,7 @@ jobs:
         runner:
           - ubuntu-22.04
           - macos-14
+          - windows-2022
     runs-on: ${{ matrix.runner }}
     defaults:
       run:
@@ -172,11 +173,14 @@ jobs:
           go build -o libcue.so -buildmode=c-shared
           cp libcue.so libcue.dylib
           cp libcue.so cue.dll
+          echo "${{ github.workspace }}/libcue-checkout" >> $GITHUB_PATH
         working-directory: libcue-checkout
       - name: mypy
         run: mypy .
       - name: pytest
-        run: pytest
+        run: |-
+          echo $PATH
+          pytest
         env:
           LD_LIBRARY_PATH: ${{ github.workspace }}/libcue-checkout
           DYLD_LIBRARY_PATH: ${{ github.workspace }}/libcue-checkout

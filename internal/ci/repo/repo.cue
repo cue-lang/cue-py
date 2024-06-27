@@ -16,7 +16,6 @@ botGitHubUserEmail: "cueckoo@gmail.com"
 
 defaultBranch: "main"
 
-linuxMachine: "ubuntu-22.04"
 linuxMachine:   "ubuntu-22.04"
 macosMachine:   "macos-14"
 windowsMachine: "windows-2022"

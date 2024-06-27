@@ -121,6 +121,15 @@ ffi.cdef("""
     void	libc_free(void*);
 """)
 
+# libcue shared object name on ELF platforms (default).
+libcue_so = "libcue.so"
+if sys.platform == "darwin":
+    # macOS is Mach-O, not ELF, shared object extension is dylib.
+    libcue_so = "libcue.dylib"
+if sys.platform == "win32":
+    # on Windows shared objects don't use `lib` prefix and end with dll.
+    libcue_so = "cue.dll"
+
 if sys.platform != "win32":
     # When there are no more references to lib (such as when there
     # are no more references to this module), the Python runtime can
@@ -134,12 +143,12 @@ if sys.platform != "win32":
     # exit and it could determine that there are no more references
     # to libcue (because the program is exiting), triggering a
     # premature and dangerous dlclose. This prevents it.
-    lib = ffi.dlopen("cue", ffi.RTLD_NODELETE)
+    lib = ffi.dlopen(libcue_so, ffi.RTLD_NODELETE)
 else:
     # On Windows we don't have RTLD_NODELETE. Create an artificial
     # global reference to lib, so we prevent unloading the shared
     # library.
-    lib = ffi.dlopen("cue")
+    lib = ffi.dlopen(libcue_so)
     sys.modules[__name__]._lib_reference = lib
 
 KIND_BOTTOM = lib.CUE_KIND_BOTTOM

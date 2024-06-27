@@ -102,8 +102,7 @@ workflows: trybot: _repo.bashWorkflow & {
 			"go-version": [_repo.latestStableGo]
 			"python-version": [_repo.latestStablePython]
 
-			// TODO: Windows doesn't work yet, see issue #3253
-			runner: [_repo.linuxMachine, _repo.macosMachine]
+			runner: [_repo.linuxMachine, _repo.macosMachine, _repo.windowsMachine]
 		}
 	}
 

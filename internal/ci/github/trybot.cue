@@ -82,6 +82,7 @@ workflows: trybot: _repo.bashWorkflow & {
 				_buildLibcue,
 
 				_mypy,
+				_addLibcueToPATH,
 				_pytest,
 
 				_repo.checkGitClean,
@@ -102,8 +103,7 @@ workflows: trybot: _repo.bashWorkflow & {
 			"go-version": [_repo.latestStableGo]
 			"python-version": [_repo.latestStablePython]
 
-			// TODO: Windows doesn't work yet, see issue #3253
-			runner: [_repo.linuxMachine, _repo.macosMachine]
+			runner: [_repo.linuxMachine, _repo.macosMachine, _repo.windowsMachine]
 		}
 	}
 
@@ -152,10 +152,26 @@ workflows: trybot: _repo.bashWorkflow & {
 		run: "mypy ."
 	}
 
+	_addLibcueToPATH: json.#step & {
+		name: "Add libcue to PATH"
+		if: "runner.os == 'Windows'"
+		// On Windows LoadLibrary loads DLLs from PATH. GitHub
+		// actions doesn't allow setting PATH via `env`,
+		// rather we need to append to the file pointed to by
+		// `$GITHUB_PATH`. This will only affect future steps,
+		// so we do it before running `pytest`.
+		run: """
+			echo "${{ github.workspace }}/libcue-checkout" >> $GITHUB_PATH
+			"""
+	}
+
 	_pytest: json.#step & {
 		name: "pytest"
 		env: LD_LIBRARY_PATH: "${{ github.workspace }}/libcue-checkout"
 		env: DYLD_LIBRARY_PATH: "${{ github.workspace }}/libcue-checkout"
-		run: "pytest"
+		run: """
+			echo $PATH
+			pytest
+			"""
 	}
 }

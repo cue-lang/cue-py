@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9d776f0_d9326ac1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1021694
+      },
+      "writtenOn": "2024-07-01T14:54:04Z",
+      "side": 1,
+      "message": "I don\u0027t have the ability to +2 in this repo.",
+      "revId": "4131958b8f4e09c379a4a480a9efdc8cfbc371a4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82ff676d_be79854e",
+        "filename": "internal/ci/github/trybot.cue",
+        "patchSetId": 4
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1021694
+      },
+      "writtenOn": "2024-07-01T14:54:04Z",
+      "side": 1,
+      "message": "nit: if I were reading this CUE, it would read more clearly to me cased as either\n```\n_addLibCueToPath\n```\n\nor \n\n```\n_addLibcueToPath\n```",
+      "range": {
+        "startLine": 85,
+        "startChar": 4,
+        "endLine": 85,
+        "endChar": 20
+      },
+      "revId": "4131958b8f4e09c379a4a480a9efdc8cfbc371a4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}

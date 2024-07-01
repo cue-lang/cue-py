@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc5ccda0_3f7c0d52",
+        "filename": "internal/ci/github/trybot.cue",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1021694
+      },
+      "writtenOn": "2024-07-01T14:54:04Z",
+      "side": 0,
+      "message": "This removal feels premature in this CL, given the commit message.",
+      "range": {
+        "startLine": 105,
+        "startChar": 6,
+        "endLine": 105,
+        "endChar": 10
+      },
+      "revId": "31cfa68dff2b26e52dea9f6e15260603f5663b7c",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    }
+  ]
+}

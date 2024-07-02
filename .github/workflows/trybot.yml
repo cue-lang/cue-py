@@ -60,16 +60,7 @@ jobs:
           Dispatch-Trailer: {"type":"'))
         name: Check we don't have Dispatch-Trailer on a protected branch
         run: |-
-          echo "github.event.head_commit.message contains Dispatch-Trailer"
-          echo "github.event.head_commit.message value"
-          cat <<EOD
-          ${{ github.event.head_commit.message }}
-          EOD
-          echo "containsDispatchTrailer expression"
-          cat <<EOD
-          (contains(github.event.head_commit.message, '
-          Dispatch-Trailer: {"type":"'))
-          EOD
+          echo "github.event.head_commit.message contains Dispatch-Trailer but we are on a protected branch"
           false
       - uses: cue-lang/setup-cue@v1.0.0
         with:
@@ -117,7 +108,8 @@ jobs:
           cue cmd importjsonschema ./vendor
           cue cmd gen
         working-directory: ./internal/ci
-      - name: Check that git is clean at the end of the job
+      - if: always()
+        name: Check that git is clean at the end of the job
         run: test -z "$(git status --porcelain)" || (git status; git diff; false)
       - name: Install Go
         uses: actions/setup-go@v5
@@ -179,5 +171,6 @@ jobs:
         env:
           LD_LIBRARY_PATH: ${{ github.workspace }}/libcue-checkout
           DYLD_LIBRARY_PATH: ${{ github.workspace }}/libcue-checkout
-      - name: Check that git is clean at the end of the job
+      - if: always()
+        name: Check that git is clean at the end of the job
         run: test -z "$(git status --porcelain)" || (git status; git diff; false)

@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd0c79d4_fb364ef9",
+        "filename": ".github/workflows/trybot.yml",
+        "patchSetId": 4
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1007275
+      },
+      "writtenOn": "2024-07-02T10:48:32Z",
+      "side": 1,
+      "message": "Personally I think I\u0027d use single quotes so it\u0027s clear that we don\u0027t want variable expansion inside the expanded value on `${{ github.workspace }}`",
+      "revId": "4131958b8f4e09c379a4a480a9efdc8cfbc371a4",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "a9d776f0_d9326ac1",

@@ -16,6 +16,23 @@
       "message": "I don\u0027t think I have the requisite context to review this change in this repo, and I can\u0027t +2 in this repo.",
       "revId": "cd9d29b99e95d501fcbf02458afeddfaeff62e6b",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e0e991b_12e17254",
+        "filename": "libcue/api.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1007275
+      },
+      "writtenOn": "2024-07-02T10:43:34Z",
+      "side": 1,
+      "message": "nit:\n```suggestion\nelif sys.platform \u003d\u003d \"win32\":\n```",
+      "revId": "cd9d29b99e95d501fcbf02458afeddfaeff62e6b",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }

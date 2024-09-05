@@ -68,7 +68,7 @@ workflows: trybot: _repo.bashWorkflow & {
 
 				_repo.checkGitClean,
 
-				_installGo,
+				for v in _installGo {v},
 				_installPython,
 
 				// cachePre must come after installing Go,
@@ -103,13 +103,14 @@ workflows: trybot: _repo.bashWorkflow & {
 			"go-version": [_repo.latestStableGo]
 			"python-version": [_repo.latestStablePython]
 
-            // TODO: Windows doesn't work yet, see issue #3253
+			// TODO: Windows doesn't work yet, see issue #3253
 			runner: [_repo.linuxMachine, _repo.macosMachine]
 		}
 	}
 
 	_installGo: _repo.installGo & {
-		with: "go-version": goVersionVal
+		#setupGo: with: "go-version": goVersionVal
+		_
 	}
 
 	_installPython: json.#step & {
@@ -117,13 +118,13 @@ workflows: trybot: _repo.bashWorkflow & {
 		uses: "actions/setup-python@v5"
 		with: {
 			"python-version": pythonVersionVal
-			cache: "pip"
+			cache:            "pip"
 		}
 	}
 
 	_runPip: json.#step & {
 		name: "pip install"
-		run: "pip install -r requirements.txt"
+		run:  "pip install -r requirements.txt"
 	}
 
 	_checkoutLibcue: json.#step & {
@@ -131,12 +132,12 @@ workflows: trybot: _repo.bashWorkflow & {
 		uses: "actions/checkout@v4"
 		with: {
 			repository: "cue-lang/libcue"
-			path: "libcue-checkout"
+			path:       "libcue-checkout"
 		}
 	}
 
 	_buildLibcue: json.#step & {
-		name: "Build libcue"
+		name:                "Build libcue"
 		"working-directory": "libcue-checkout"
 		// The name of the shared library is target-dependent.
 		// Build libcue with all possible names so we're covered
@@ -150,12 +151,12 @@ workflows: trybot: _repo.bashWorkflow & {
 
 	_mypy: json.#step & {
 		name: "mypy"
-		run: "mypy ."
+		run:  "mypy ."
 	}
 
 	_addLibcueToPath: json.#step & {
 		name: "Add libcue to PATH"
-		if: "runner.os == 'Windows'"
+		if:   "runner.os == 'Windows'"
 		// On Windows LoadLibrary loads DLLs from PATH. GitHub
 		// actions doesn't allow setting PATH via `env`,
 		// rather we need to append to the file pointed to by
@@ -168,7 +169,7 @@ workflows: trybot: _repo.bashWorkflow & {
 
 	_pytest: json.#step & {
 		name: "pytest"
-		env: LD_LIBRARY_PATH: "${{ github.workspace }}/libcue-checkout"
+		env: LD_LIBRARY_PATH:   "${{ github.workspace }}/libcue-checkout"
 		env: DYLD_LIBRARY_PATH: "${{ github.workspace }}/libcue-checkout"
 		run: "pytest"
 	}

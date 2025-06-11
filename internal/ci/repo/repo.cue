@@ -20,7 +20,4 @@ linuxMachine:   "ubuntu-22.04"
 macosMachine:   "macos-14"
 windowsMachine: "windows-2022"
 
-// libcue requires Go 1.22+, so we can't test on any earlier version.
-latestStableGo: "1.23.x"
-
 latestStablePython: "3.12"

@@ -98,7 +98,7 @@ workflows: trybot: _repo.bashWorkflow & {
 	_testStrategy: {
 		"fail-fast": false
 		matrix: {
-			"go-version": [_repo.latestStableGo]
+			"go-version": ["stable"]
 			"python-version": [_repo.latestStablePython]
 
 			// TODO: Windows doesn't work yet, see issue #3253

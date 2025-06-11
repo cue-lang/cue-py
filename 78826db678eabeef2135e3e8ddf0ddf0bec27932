@@ -16,6 +16,24 @@
       "message": "As with https://review.gerrithub.io/c/cue-lang/libcue/+/1216779/comments/182f4b5d_3e7c2f58:\n\nThis change looks sensible, but it would be easier to review if the change called out these different sets of files leading to different levels of attention/understanding-the-diff.\n\nI only have permission to +1 in this repo.",
       "revId": "78826db678eabeef2135e3e8ddf0ddf0bec27932",
       "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69edf775_5bda2b4d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1017723
+      },
+      "writtenOn": "2025-06-11T12:42:15Z",
+      "side": 1,
+      "message": "I\u0027ve tweaked the commit message slightly to make it easier, without going to the effort of listing all files.",
+      "parentUuid": "8aaa65f1_e6ec116e",
+      "revId": "78826db678eabeef2135e3e8ddf0ddf0bec27932",
+      "serverId": "d5d70762-12d0-45a1-890d-524b12d3f735"
     }
   ]
 }

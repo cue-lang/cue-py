@@ -16,8 +16,7 @@ package github
 
 import (
 	"list"
-
-	"github.com/SchemaStore/schemastore/src/schemas/json"
+	"cue.dev/x/githubactions"
 )
 
 // The trybot workflow.
@@ -50,18 +49,17 @@ workflows: trybot: _repo.bashWorkflow & {
 			steps: [
 				for v in _repo.checkoutCode {v},
 
-				json.#step & {
-					uses: "cue-lang/setup-cue@v1.0.0"
-					with: version: "v0.10.0"
+				{
+					uses: "cue-lang/setup-cue@v1.0.1"
+					with: version: "latest"
 				},
 
 				for v in _installGo {v},
 				_repo.earlyChecks,
 
-				json.#step & {
+				{
 					name: "Re-generate CI"
 					run: """
-						cue cmd importjsonschema ./vendor
 						cue cmd gen
 						"""
 					"working-directory": "./internal/ci"
@@ -113,7 +111,7 @@ workflows: trybot: _repo.bashWorkflow & {
 		_
 	}
 
-	_installPython: json.#step & {
+	_installPython: githubactions.#Step & {
 		name: "Install Python"
 		uses: "actions/setup-python@v5"
 		with: {
@@ -122,12 +120,12 @@ workflows: trybot: _repo.bashWorkflow & {
 		}
 	}
 
-	_runPip: json.#step & {
+	_runPip: githubactions.#Step & {
 		name: "pip install"
 		run:  "pip install -r requirements.txt"
 	}
 
-	_checkoutLibcue: json.#step & {
+	_checkoutLibcue: githubactions.#Step & {
 		name: "Checkout libcue"
 		uses: "actions/checkout@v4"
 		with: {
@@ -136,7 +134,7 @@ workflows: trybot: _repo.bashWorkflow & {
 		}
 	}
 
-	_buildLibcue: json.#step & {
+	_buildLibcue: githubactions.#Step & {
 		name:                "Build libcue"
 		"working-directory": "libcue-checkout"
 		// The name of the shared library is target-dependent.
@@ -149,12 +147,12 @@ workflows: trybot: _repo.bashWorkflow & {
 			"""
 	}
 
-	_mypy: json.#step & {
+	_mypy: githubactions.#Step & {
 		name: "mypy"
 		run:  "mypy ."
 	}
 
-	_addLibcueToPath: json.#step & {
+	_addLibcueToPath: githubactions.#Step & {
 		name: "Add libcue to PATH"
 		if:   "runner.os == 'Windows'"
 		// On Windows LoadLibrary loads DLLs from PATH. GitHub
@@ -167,7 +165,7 @@ workflows: trybot: _repo.bashWorkflow & {
 			"""
 	}
 
-	_pytest: json.#step & {
+	_pytest: githubactions.#Step & {
 		name: "pytest"
 		env: LD_LIBRARY_PATH:   "${{ github.workspace }}/libcue-checkout"
 		env: DYLD_LIBRARY_PATH: "${{ github.workspace }}/libcue-checkout"

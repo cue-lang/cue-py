@@ -40,9 +40,11 @@ workflows: close({
 	// [string]: json.#Workflow
 
 	_repo.trybotWorkflows
-	trybot_dispatch: #dummyDispatch: dummyDispatch
+
+	trybot: _
+	trybot_dispatch: #dummyDispatch: _dummyDispatch
 })
 
-dummyDispatch: _repo.#dispatch & {
+_dummyDispatch: _repo.#dispatch & {
 	type: _repo.trybot.key
 }

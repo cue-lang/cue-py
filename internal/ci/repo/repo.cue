@@ -17,3 +17,6 @@ botGitHubUserEmail: "cueckoo@gmail.com"
 defaultBranch: "main"
 
 latestStablePython: "3.12"
+
+// TODO(mvdan): remove once https://github.com/actions/setup-python/issues/1244 is resolved.
+macosMachine: "macos-14"

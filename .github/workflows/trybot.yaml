@@ -24,7 +24,7 @@ jobs:
           - "3.12"
         runner:
           - namespace-profile-linux-amd64
-          - ns-macos-arm64
+          - macos-14
     runs-on: ${{ matrix.runner }}
     if: |-
       (contains(github.event.head_commit.message, '
@@ -95,14 +95,6 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           cache: pip
-      - if: github.event_name != 'schedule' && matrix.runner != 'ns-windows-amd64'
-        uses: namespacelabs/nscloud-cache-action@v1
-        with:
-          cache: go
-      - if: |-
-          github.repository == 'cue-lang/cue-py' && (((github.ref == 'refs/heads/main') && (! (contains(github.event.head_commit.message, '
-          Dispatch-Trailer: {"type":"')))) || (github.ref == 'refs/heads/ci/test'))
-        run: go env -w GOFLAGS=-count=1
       - name: pip install
         run: pip install -r requirements.txt
       - name: Checkout libcue

@@ -66,7 +66,8 @@ workflows: trybot: _repo.bashWorkflow & {
 				// cachePre must come after installing Go,
 				// because the cache locations
 				// are established by running each tool.
-				for v in _repo.setupCaches {v},
+				// TODO(mvdan): re-enable once https://github.com/actions/setup-python/issues/1244 is resolved.
+				// for v in _repo.setupCaches {v},
 
 				_runPip,
 

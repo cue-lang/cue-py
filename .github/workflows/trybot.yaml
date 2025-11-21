@@ -23,7 +23,7 @@ jobs:
         python-version:
           - "3.12"
         runner:
-          - namespace-profile-linux-amd64
+          - ubuntu-24.04
           - ns-macos-arm64
     runs-on: ${{ matrix.runner }}
     if: |-

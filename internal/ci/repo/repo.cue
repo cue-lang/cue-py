@@ -17,3 +17,5 @@ botGitHubUserEmail: "cueckoo@gmail.com"
 defaultBranch: "main"
 
 latestStablePython: "3.12"
+
+linuxMachine: "ubuntu-24.04"

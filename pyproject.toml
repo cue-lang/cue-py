@@ -7,7 +7,8 @@ where = ["."]
 include = ["cue*", "libcue*"]
 
 [tool.setuptools.package-data]
-libcue = ["libcue.dylib", "libcue.so", "cue.dll"]
+cue = ["py.typed"]
+libcue = ["libcue.dylib", "libcue.so", "cue.dll", "py.typed"]
 
 [project]
 name = "cue-py"

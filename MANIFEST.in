@@ -1,3 +1,5 @@
 include libcue/libcue.dylib
 include libcue/libcue.so
 include libcue/cue.dll
+include cue/py.typed
+include libcue/py.typed

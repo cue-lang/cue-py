@@ -1,10 +1,13 @@
 [build-system]
-requires = ["setuptools>=61.0"]
+requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["cue*", "libcue*"]
+
+[tool.setuptools.package-data]
+libcue = ["libcue.dylib", "libcue.so", "cue.dll"]
 
 [project]
 name = "cue-py"

@@ -20,9 +20,11 @@ This module implements low-level bindings to libcue.
 # Silence the type checker about missing attributes (symbols) not
 # known at type-check time.
 # mypy: disable-error-code="attr-defined"
+# pyright: reportAttributeAccessIssue=false
 
 from typing import Optional
 from cffi import FFI
+from pathlib import Path
 import sys
 
 ffi = FFI()
@@ -130,6 +132,12 @@ elif sys.platform == "win32":
     # on Windows shared objects don't use `lib` prefix and end with dll.
     libcue_so = "cue.dll"
 
+# The platform wheel bundles the libcue shared library next to this module.
+# Prefer it when present, but retain the original system-library lookup for
+# source installs and environments that already provide libcue.
+libcue_path = Path(__file__).with_name(libcue_so)
+libcue_library = str(libcue_path) if libcue_path.is_file() else libcue_so
+
 if sys.platform != "win32":
     # When there are no more references to lib (such as when there
     # are no more references to this module), the Python runtime can
@@ -143,12 +151,12 @@ if sys.platform != "win32":
     # exit and it could determine that there are no more references
     # to libcue (because the program is exiting), triggering a
     # premature and dangerous dlclose. This prevents it.
-    lib = ffi.dlopen(libcue_so, ffi.RTLD_NODELETE)
+    lib = ffi.dlopen(libcue_library, ffi.RTLD_NODELETE)
 else:
     # On Windows we don't have RTLD_NODELETE. Create an artificial
     # global reference to lib, so we prevent unloading the shared
     # library.
-    lib = ffi.dlopen(libcue_so)
+    lib = ffi.dlopen(libcue_library)
     sys.modules[__name__]._lib_reference = lib
 
 KIND_BOTTOM = lib.CUE_KIND_BOTTOM

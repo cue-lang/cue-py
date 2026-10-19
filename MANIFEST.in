@@ -1,0 +1,3 @@
+include libcue/libcue.dylib
+include libcue/libcue.so
+include libcue/cue.dll

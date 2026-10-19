@@ -36,6 +36,6 @@ class Error(Exception):
 
     def __str__(self):
         c_str = libcue.error_string(self._res())
-        s = libcue.ffi.string(c_str).decode("utf-8")
+        s = libcue.ffi.string(c_str).decode("utf-8")  # type: ignore[union-attr]
         libcue.libc_free(c_str)
         return s

@@ -12,6 +12,11 @@ libcue-checkout/
 *.dylib
 *.dll
 
+# Packaging artifacts
+build/
+dist/
+*.egg-info/
+
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt

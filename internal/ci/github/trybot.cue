@@ -75,7 +75,6 @@ workflows: trybot: _repo.bashWorkflow & {
 				_buildLibcue,
 
 				_mypy,
-				_addLibcueToPath,
 				_pytest,
 
 				_repo.checkGitClean,
@@ -116,21 +115,14 @@ workflows: trybot: _repo.bashWorkflow & {
 		uses: "actions/checkout@v4"
 		with: {
 			repository: "cue-lang/libcue"
+			ref:        "96d0572450429fa28d7a2345c04a8c47c85b47e4"
 			path:       "libcue-checkout"
 		}
 	}
 
 	_buildLibcue: githubactions.#Step & {
-		name:                "Build libcue"
-		"working-directory": "libcue-checkout"
-		// The name of the shared library is target-dependent.
-		// Build libcue with all possible names so we're covered
-		// in all cases.
-		run: """
-			go build -o libcue.so -buildmode=c-shared
-			cp libcue.so libcue.dylib
-			cp libcue.so cue.dll
-			"""
+		name: "Bundle libcue"
+		run:  "python scripts/build_libcue.py libcue-checkout"
 	}
 
 	_mypy: githubactions.#Step & {
@@ -138,23 +130,8 @@ workflows: trybot: _repo.bashWorkflow & {
 		run:  "mypy ."
 	}
 
-	_addLibcueToPath: githubactions.#Step & {
-		name: "Add libcue to PATH"
-		if:   "runner.os == 'Windows'"
-		// On Windows LoadLibrary loads DLLs from PATH. GitHub
-		// actions doesn't allow setting PATH via `env`,
-		// rather we need to append to the file pointed to by
-		// `$GITHUB_PATH`. This will only affect future steps,
-		// so we do it before running `pytest`.
-		run: """
-			echo '${{ github.workspace }}/libcue-checkout' >> $GITHUB_PATH
-			"""
-	}
-
 	_pytest: githubactions.#Step & {
 		name: "pytest"
-		env: LD_LIBRARY_PATH:   "${{ github.workspace }}/libcue-checkout"
-		env: DYLD_LIBRARY_PATH: "${{ github.workspace }}/libcue-checkout"
 		run: "pytest"
 	}
 }

@@ -111,7 +111,7 @@ def encode_build_opts(*opts: BuildOption) -> Optional[FFI.CData]:
                 a[i].b = b
             case Scope(scope):
                 a[i].tag = libcue.BUILD_SCOPE
-                a[i].value = scope._val
+                a[i].value = scope._res()
             case _:
                 # use `assert_never` on `_` to enable
                 # exhaustiveness matching.

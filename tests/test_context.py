@@ -34,6 +34,14 @@ def test_compile_empty_with_options():
     val = ctx.compile("", cue.FileName("empty.cue"), cue.ImportPath("example.com/foo/bar"))
     assert isinstance(val, cue.Value)
 
+def test_compile_with_scope():
+    ctx = cue.Context()
+    scope = ctx.compile("width: 7")
+
+    val = ctx.compile("area: width * 4", cue.Scope(scope))
+
+    assert val.to_json() == '{"area":28}'
+
     val = ctx.compile(b"", cue.FileName("empty.cue"), cue.ImportPath("example.com/foo/bar"))
     assert isinstance(val, cue.Value)
 
